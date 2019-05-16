@@ -11,6 +11,10 @@ const StyledTitleCard = styled.div`
   max-width: 380px;
   box-shadow: 2px 2px 4px 1px rgb(0, 0, 0, 0.2);
   transition: 0.3s ease-in-out 0s;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 
   ${mediumDown} {
     margin-bottom: 24px;

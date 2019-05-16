@@ -193,7 +193,7 @@ class Card extends Component {
   render() {
     let cardActive = this.state.cardActive
     return (
-      <StyledCard>
+      <StyledCard className="card">
         <div className="show-for-small see-more" onClick={this.toggleActive}>
           <span className="show-for-small link">See {cardActive ? "Less" : "More"}</span>
         </div>

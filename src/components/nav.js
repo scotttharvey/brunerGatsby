@@ -3,7 +3,9 @@ import styled from "@emotion/styled"
 import brunerLogo from "../images/bruner-logo-white.svg"
 import brunerLogoDark from "../images/bruner-logo-dark.png"
 import hamburger from "../images/hamburger.svg"
-// import xburger from "../images/xburger.png"
+import rocket from "../images/pluto-success.png"
+import cat from "../images/ginger-cat-upgrade.png"
+import welcome from "../images/pluto-welcome.png"
 import { small, mediumDown } from "./mediaQuery"
 
 const StyledNav = styled.nav`
@@ -34,9 +36,9 @@ background-color: white;
 border-bottom: 1px solid #009fe3;
 z-index: 1;
 
-a {
-		color: #009fe3;
-}
+	a {
+			color: #009fe3;
+	}
 }
 
 .nav-contain {
@@ -121,18 +123,72 @@ a {
 	margin-left: 28px;
 
 	&.call {
-			font-size: 18px;
-			font-weight: bold;
-			margin-left: 0;
+		font-size: 22px;
+		font-weight: 400;
+		margin-left: 0;
 	}
 }
 `
 
+const StyledWacky = styled.section`
+
+	.rocket {
+		position: fixed;
+		left: 3%;
+		top: 20%;
+
+		img {
+			height: 250px;
+			width: 250px;
+		}
+	}
+
+	.cat {
+		position: fixed;
+		right: 40%;
+		bottom: 5%;
+
+		img {
+			height: 370px;
+			width: 370px;
+		}
+	}
+
+	.welcome {
+		position: fixed;
+		right: 1%;
+		top: 1%;
+
+		img {
+			height: 450px;
+			width: 450px;
+		}
+	}
+
+
+`
+
+const Wacky = () => (
+	<StyledWacky>
+		<div className="rocket">
+			<img src={rocket} alt="Rocket"  />
+		</div>
+		<div className="cat">
+			<img src={cat} alt="Cat"  />
+		</div>
+		<div className="welcome">
+			<img src={welcome} alt="Welcome"  />
+		</div>
+	</StyledWacky>
+)
 class Nav extends Component {
 
 state = {
 		isScrolled: false,
 		mobileActive: false,
+		pressed: [],
+		code: 'slugger',
+		success: false,
 }
 
 checkY = () => {
@@ -151,11 +207,27 @@ mobileMenu = () => {
 	this.setState({
 		mobileActive: !this.state.mobileActive
 	})
-	console.log(this.state.mobileActive);
 }
 
 componentDidMount() {
 		window.addEventListener('scroll', this.checkY);
+		window.addEventListener('keyup', e => {
+			let [pressed, code] = [this.state.pressed, this.state.code]
+			pressed.push(e.key)
+			pressed.splice(-code.length - 1, pressed.length - code.length)
+
+			if(pressed.join('') === code) {
+				console.log(`wee`);
+				this.setState({
+					success: true
+				})
+			} else {
+				this.setState({
+					success: false
+				})
+			}
+			console.log(pressed);
+		})
 }
 
 render() {
@@ -176,12 +248,16 @@ render() {
 								</div>
 						</div>
 						<div className="hide-for-medium-down">
-								<a className=" hide-for-medium-down call" href="/">Call Now: 1.888.888.888</a>
+								<a className=" hide-for-medium-down call" href="/">Call Now 1.888.888.888</a>
 						</div>
 						<div className="mobile-nav show-for-medium-down">
 						<img src={ mobileActive ? hamburger : hamburger } alt="Hamburger" onClick={this.mobileMenu} className="show-for-medium-down" />
 						</div>
 				</section>
+				{this.state.success
+				? <Wacky />
+				: ''
+				}
 		</StyledNav>
 		)
 }

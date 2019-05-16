@@ -2,6 +2,7 @@ import React from "react"
 import styled from "@emotion/styled"
 import Plus from "../images/plusIcon.png"
 import Min from "../images/minus.svg"
+import { small } from "./mediaQuery"
 
 const StyledAccordian = styled.div`
   display: flex;
@@ -16,6 +17,10 @@ const StyledAccordian = styled.div`
     cursor: pointer;
     background-color: #009fe3;
     margin-top: 18px;
+
+    ${small} {
+      font-size: 18px;
+    }
 
     &::before {
       content: "";
@@ -49,6 +54,10 @@ const StyledAccordian = styled.div`
     font-size: 18px;
     background-color: #eee;
     padding: 24px;
+
+    ${small} {
+      font-size: 16px;
+    }
   }
 
   .visible {

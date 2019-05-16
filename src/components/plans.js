@@ -3,6 +3,8 @@ import styled from "@emotion/styled"
 
 import Card from "./card"
 
+import { largeUp } from "./mediaQuery"
+
 const StyledPlans = styled.div`
 
   h2 {
@@ -14,6 +16,12 @@ const StyledPlans = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
     flex: 1;
+
+    ${largeUp} {
+      &:hover {
+        .card { border: 0; }
+      }
+    }
   }
 
   .bottom-legal {

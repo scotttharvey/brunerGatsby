@@ -11,6 +11,11 @@ const StyledHero = styled.div`
   padding-right: 24px;
   color: white;
   text-align: center;
+
+  .hero-title {
+    font-size: 60px;
+    font-weight: 300;
+  }
 `
 
 const InputContainer = styled.div`
@@ -44,13 +49,9 @@ const InputContainer = styled.div`
   }
 `
 
-let check = {
-  input: false,
-}
-
 const Hero = () => (
     <StyledHero>
-        <h1>Discover Brüner Satellite
+        <h1 className="hero-title">Discover Brüner Satellite
           <br/>
         Internet Bundles</h1>
         <p>Jimmy B is here to make the world a better place, one connection at a time. </p>
@@ -58,16 +59,12 @@ const Hero = () => (
             <input className="zip" placeholder="Enter Zip" maxLength="5" onChange={(e)=>{
               if(/\D/g.test(e.currentTarget.value)) {
                 e.currentTarget.style.color = 'tomato'
-                check.input = false;
               } else {
                 e.currentTarget.style.color = 'black'
-                check.input = true;
               }
 
             }}/>
-            <button id="btn" className="flex" disabled={check.input} onClick={()=>{
-              console.log(check.input);
-            }}>
+            <button id="btn" className="flex" >
             <span className="show-for-small">See Plans!</span>
             <span className="hide-for-small">Connect with the Brüner</span>
             </button>
