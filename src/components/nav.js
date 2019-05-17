@@ -187,7 +187,7 @@ state = {
 		isScrolled: false,
 		mobileActive: false,
 		pressed: [],
-		code: 'slugger',
+		code: 'james',
 		success: false,
 }
 
@@ -209,25 +209,26 @@ mobileMenu = () => {
 	})
 }
 
+secret = e => {
+	let [pressed, code] = [this.state.pressed, this.state.code]
+	pressed.push(e.key)
+	pressed.splice(-code.length - 1, pressed.length - code.length)
+
+	if(pressed.join('') === code) {
+		this.setState({
+			success: true
+		})
+	} else {
+		this.setState({
+			success: false
+		})
+	}
+	console.log(pressed);
+}
+
 componentDidMount() {
 		window.addEventListener('scroll', this.checkY);
-		window.addEventListener('keyup', e => {
-			let [pressed, code] = [this.state.pressed, this.state.code]
-			pressed.push(e.key)
-			pressed.splice(-code.length - 1, pressed.length - code.length)
-
-			if(pressed.join('') === code) {
-				console.log(`wee`);
-				this.setState({
-					success: true
-				})
-			} else {
-				this.setState({
-					success: false
-				})
-			}
-			console.log(pressed);
-		})
+		window.addEventListener('keyup', this.secret)
 }
 
 render() {
